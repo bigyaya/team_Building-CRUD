@@ -30,6 +30,23 @@ export async function getServerSideProps() {
       return activity;
     });
 
+  //    // Sérialiser les dates en chaînes de caractères
+  // const serializedActivities = activities.map((activity) => {
+  //   return {
+  //     ...activity,
+  //     availableDates: activity.availableDates.map(date => date.toISOString()), // Conversion des dates
+  //     dateCreation: activity.dateCreation ? activity.dateCreation.toISOString() : null // Sérialisation de la date de création
+  //   };
+  // });
+
+  //  return {
+  //   props: {
+  //     activities: serializedActivities
+  //   }
+  // };
+
+    console.log('Activités récupérées :', activities); // Ajoutez ceci pour voir si les activités sont récupérées
+
     return {
       props: { activities }, // Passer les activités en tant que props
     };
@@ -42,4 +59,6 @@ export async function getServerSideProps() {
     };
   }
 }
+
+
 
