@@ -1,0 +1,20 @@
+/* styles/footer.css */
+
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+  }
+  
+  .footer .social-icons a {
+    color: white;
+    margin-right: 1rem;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .footer .social-icons a:hover {
+    color: #00CBA9; /* Couleur au survol */
+  }
+  

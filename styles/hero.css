@@ -1,0 +1,44 @@
+/* styles/hero.css */
+
+.hero {
+    height: 100vh; /* Pleine hauteur de la fenêtre */
+    background-image: url('/creative-pic.png'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+  }
+  
+  .hero h1 {
+    font-size: 4rem; /* Grande taille pour le texte principal */
+    font-weight: 700;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Ombre légère pour rendre le texte plus lisible */
+  }
+  
+  .hero p {
+    font-size: 1.5rem;
+    color: white;
+    margin-top: 1rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  }
+  
+  .hero button {
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    background-color: #00CBA9;
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .hero button:hover {
+    background-color: #009c85;
+  }
+  

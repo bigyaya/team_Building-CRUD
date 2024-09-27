@@ -1,0 +1,59 @@
+/* styles/navbar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F5E3C2; /* Couleur de fond claire inspirée du design */
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Légère ombre portée */
+  }
+  
+  .navbar-logo img {
+    height: 60px; /* Taille du logo basée sur la capture d'écran */
+  }
+  
+  .navbar-links {
+    display: flex;
+    gap: 2rem; /* Espace entre les liens */
+  }
+  
+  .navbar-links a {
+    color: #333; /* Couleur du texte */
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem; /* Taille du texte */
+    transition: color 0.3s;
+  }
+  
+  .navbar-links a:hover {
+    color: #0070f3; /* Changement de couleur au survol */
+  }
+  
+  .navbar-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .navbar-buttons button {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 25px; /* Bord arrondi comme dans ton design */
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .navbar-buttons .login {
+    background-color: #00CBA9; /* Couleur de bouton Connexion */
+    color: white;
+  }
+  
+  .navbar-buttons .signup {
+    background-color: #0070f3; /* Couleur de bouton Inscription */
+    color: white;
+  }
+  
+  .navbar-buttons button:hover {
+    background-color: #005bb5; /* Changement de couleur au survol */
+  }
+  
