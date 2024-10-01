@@ -12,6 +12,18 @@ const UtilisateurSchema = new mongoose.Schema({
     motDePasse: {
         type: String, // Le type de données est une chaîne de caractères
         required: true // Champ obligatoire
+    },
+    nom: {
+        type: String, // Le type de données est une chaîne de caractères
+        required: false // Champ optionnel
+    },
+    age: {
+        type: Number, // Le type de données est un nombre
+        required: false // Champ optionnel
+    },
+    adresse: {
+        type: String, // Le type de données est une chaîne de caractères
+        required: false // Champ optionnel
     }
 });
 

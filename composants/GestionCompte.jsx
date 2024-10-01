@@ -3,23 +3,34 @@ import { useRouter } from 'next/router'; // Importer useRouter pour la navigatio
 import '../styles/GestionCompte.css'
 
 export default function GestionCompte() {
-  const [comptes, setComptes] = useState([]); // Stocker les comptes récupérés depuis l'API
+  const [comptes, setComptes] = useState([]); // État pour stocker les comptes
   const [popupVisible, setPopupVisible] = useState(false); // État pour gérer la visibilité de la popup
-  const router = useRouter(); // Utilisation de useRouter pour les redirections
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // État pour savoir si l'utilisateur est connecté
+  const router = useRouter(); // Hook pour rediriger l'utilisateur
 
-  // Récupérer les comptes au montage du composant
+  // Utiliser useEffect pour vérifier si l'utilisateur est connecté
   useEffect(() => {
-    const fetchComptes = async () => {
-      try {
-        const res = await fetch('/api/utilisateurs/comptes'); // Appel à l'API pour récupérer les comptes
-        const data = await res.json(); // Conversion de la réponse en JSON
-        setComptes(data.comptes); // Mise à jour de l'état avec les comptes
-      } catch (error) {
-        console.error('Erreur lors de la récupération des comptes:', error); // Afficher une erreur en cas de problème
-      }
-    };
-    fetchComptes(); // Appel de la fonction pour récupérer les comptes
+    const token = localStorage.getItem('token'); // Vérifier s'il y a un token dans le localStorage
+    if (token) {
+      setIsLoggedIn(true); // Si un token existe, l'utilisateur est connecté
+    }
   }, []); // Exécuter ce hook seulement au montage
+
+  // Récupérer les comptes au montage du composant (si l'utilisateur est connecté)
+  useEffect(() => {
+    if (isLoggedIn) { // Ne récupérer les comptes que si l'utilisateur est connecté
+      const fetchComptes = async () => {
+        try {
+          const res = await fetch('/api/utilisateurs/comptes'); // Appel à l'API pour récupérer les comptes
+          const data = await res.json(); // Conversion de la réponse en JSON
+          setComptes(data.comptes); // Mise à jour de l'état avec les comptes
+        } catch (error) {
+          console.error('Erreur lors de la récupération des comptes:', error); // Afficher une erreur en cas de problème
+        }
+      };
+      fetchComptes(); // Appel de la fonction pour récupérer les comptes
+    }
+  }, [isLoggedIn]); // Exécuter seulement si isLoggedIn est vrai
 
   // Basculer la visibilité de la popup
   const togglePopup = () => {
@@ -62,15 +73,13 @@ export default function GestionCompte() {
     }
   };
 
-  // Fonction pour fermer la popup lorsqu'on clique à l'extérieur
-  const closePopupOnOutsideClick = (e) => {
-    if (e.target.classList.contains('popup-overlay')) {
-      setPopupVisible(false); // Fermer la popup
-    }
-  };
+  // Si l'utilisateur n'est pas connecté, ne pas afficher le bouton
+  if (!isLoggedIn) {
+    return null; // Retourner null pour ne rien afficher
+  }
 
   return (
-    <div className="compte-container"> {/* Conteneur principal */}
+    <div className="compte-container"> {/* Conteneur pour la gestion des comptes */}
       {/* Bouton pour ouvrir la fenêtre popup */}
       <button onClick={togglePopup} className="compte-button">
         Gérer mes comptes
@@ -78,7 +87,7 @@ export default function GestionCompte() {
 
       {/* Afficher la fenêtre popup si visible */}
       {popupVisible && (
-        <div className="popup-overlay" onClick={closePopupOnOutsideClick}> {/* Overlay qui recouvre l'écran */}
+        <div className="popup-overlay" onClick={() => setPopupVisible(false)}> {/* Overlay qui recouvre l'écran */}
           <div className="popup-window"> {/* Fenêtre popup */}
             <h3>Liste des comptes</h3>
             {/* Boucle sur les comptes pour les afficher */}

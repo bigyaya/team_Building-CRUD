@@ -1,119 +1,94 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState } from 'react'; // Importer useState pour gérer les entrées de l'utilisateur
+import { useRouter } from 'next/router'; // Importer useRouter pour rediriger après la mise à jour
+import '../styles/profil.css'
 
 export default function ProfilPage() {
-  const [email, setEmail] = useState('');
-  const [newEmail, setNewEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const router = useRouter();
+  const [nom, setNom] = useState(''); // État pour le nom
+  const [email, setEmail] = useState(''); // État pour l'email
+  const [age, setAge] = useState(''); // État pour l'âge
+  const [adresse, setAdresse] = useState(''); // État pour l'adresse
 
-  // Fonction pour mettre à jour les informations de l'utilisateur
-  const handleUpdate = async (e) => {
-    e.preventDefault();
+  const router = useRouter(); // Utiliser useRouter pour rediriger
 
+  // Fonction pour gérer la soumission du formulaire
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Empêcher le comportement par défaut de rechargement de la page
+
+    // Envoyer les données du formulaire à l'API
     try {
-      const res = await fetch('/api/utilisateurs/update', {
-        method: 'PUT',
+      const res = await fetch('/api/utilisateurs/updateProfile', {
+        method: 'POST', // Méthode POST pour l'envoi des données
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json', // Les données envoyées sont en JSON
         },
-        body: JSON.stringify({ email, newEmail, newPassword }),
+        body: JSON.stringify({
+          nom,
+          email,
+          age,
+          adresse,
+        }), // Envoyer les informations de profil dans le body de la requête
       });
 
-      const data = await res.json();
+      const data = await res.json(); // Récupérer la réponse en JSON
       if (data.success) {
-        alert('Mise à jour réussie');
-        router.push('/'); // Redirection après mise à jour réussie
+        alert('Profil mis à jour avec succès'); // Afficher un message de succès
+        router.push('/'); // Rediriger vers la page d'accueil après la mise à jour
       } else {
-        alert('Erreur lors de la mise à jour');
+        alert('Erreur lors de la mise à jour du profil');
       }
     } catch (error) {
-      console.error('Erreur:', error);
-      alert('Erreur lors de la mise à jour');
-    }
-  };
-
-  // Fonction pour supprimer le compte de l'utilisateur avec confirmation
-  const handleDelete = async () => {
-    // Avertissement avant suppression
-    const confirmation = confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.');
-
-    if (confirmation) {
-      // Si l'utilisateur confirme, on procède à la suppression
-      try {
-        const res = await fetch('/api/utilisateurs/delete', {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email }),
-        });
-
-        const data = await res.json();
-        if (data.success) {
-          alert('Compte supprimé avec succès');
-          router.push('/'); // Redirection après suppression réussie
-        } else {
-          alert('Erreur lors de la suppression');
-        }
-      } catch (error) {
-        console.error('Erreur:', error);
-        alert('Erreur lors de la suppression');
-      }
-    } else {
-      // Si l'utilisateur annule, on ne fait rien
-      alert('Suppression annulée');
+      console.error('Erreur lors de la mise à jour:', error);
     }
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-box">
-        <h2 className="auth-title">Mon Profil</h2>
-        <p className="sub-text">Modifiez votre email ou mot de passe ici</p>
+    <div className="profil-container"> {/* Conteneur principal */}
+      <h1>Mon Profil</h1>
+      <form onSubmit={handleSubmit}> {/* Formulaire pour la mise à jour du profil */}
+        <div className="input-group">
+          <label htmlFor="nom">Nom :</label>
+          <input
+            type="text"
+            id="nom"
+            value={nom}
+            onChange={(e) => setNom(e.target.value)} // Mettre à jour l'état du nom
+            required
+          />
+        </div>
 
-        <form onSubmit={handleUpdate}>
-          <div className="input-group">
-            <label htmlFor="email">Email actuel</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Entrez votre email actuel"
-              required
-            />
-          </div>
+        <div className="input-group">
+          <label htmlFor="email">Email :</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} // Mettre à jour l'état de l'email
+            required
+          />
+        </div>
 
-          <div className="input-group">
-            <label htmlFor="newEmail">Nouveau Email (optionnel)</label>
-            <input
-              type="email"
-              id="newEmail"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-              placeholder="Entrez un nouvel email"
-            />
-          </div>
+        <div className="input-group">
+          <label htmlFor="age">Âge :</label>
+          <input
+            type="number"
+            id="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)} // Mettre à jour l'état de l'âge
+          />
+        </div>
 
-          <div className="input-group">
-            <label htmlFor="newPassword">Nouveau Mot de Passe (optionnel)</label>
-            <input
-              type="password"
-              id="newPassword"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              placeholder="Entrez un nouveau mot de passe"
-            />
-          </div>
+        <div className="input-group">
+          <label htmlFor="adresse">Adresse :</label>
+          <input
+            type="text"
+            id="adresse"
+            value={adresse}
+            onChange={(e) => setAdresse(e.target.value)} // Mettre à jour l'état de l'adresse
+          />
+        </div>
 
-          <button type="submit" className="btn primary-btn">Mettre à jour</button>
-        </form>
-
-        <button onClick={handleDelete} className="btn secondary-btn">
-          Supprimer mon compte
-        </button>
-      </div>
+        <button type="submit" className="btn-submit">Mettre à jour le profil</button> {/* Bouton de soumission */}
+      </form>
     </div>
   );
 }
