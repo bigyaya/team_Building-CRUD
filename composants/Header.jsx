@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import '../styles/navbar.css'; // Import des styles CSS
+import GestionCompte from './GestionCompte';
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -47,7 +48,7 @@ export default function Header() {
       <div className="navbar-buttons">
         {isLoggedIn ? (
           <>
-            <button onClick={() => router.push('/profile')} className="login">
+            <button onClick={() => router.push('/profil')} className="login">
               Profil
             </button>
             <button onClick={handleLogout} className="signup">
@@ -64,6 +65,9 @@ export default function Header() {
             </button>
           </>
         )}
+      </div>
+      <div className="navbar-buttons">
+        <GestionCompte /> {/* Affichage du menu de gestion des comptes */}
       </div>
     </header>
   );

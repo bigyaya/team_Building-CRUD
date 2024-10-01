@@ -1,0 +1,80 @@
+/* Conteneur de la popup */
+.popup-overlay {
+    position: fixed; /* La popup recouvre l'écran */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Assure que la popup reste au-dessus */
+  }
+  
+  /* Fenêtre popup */
+  .popup-window {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour la fenêtre */
+    width: 30%; /* Largeur fixe pour la fenêtre */
+    text-align: center;
+  }
+  
+  .compte-item {
+    display: flex;
+    justify-content: space-between; /* Aligner les éléments à gauche et à droite */
+    align-items: center; /* Assurer que les boutons et le texte sont alignés verticalement */
+    margin-bottom: 10px; /* Espacement entre chaque compte */
+    width: 100%; /* Assurer que l'élément prend toute la largeur */
+  }
+  
+  .compte-item span {
+    flex: 1; /* Prendre tout l'espace disponible à gauche */
+    text-align: left; /* Aligner le texte de l'email à gauche */
+    margin-right: 10px; /* Ajouter un espace entre le texte et les boutons */
+    white-space: nowrap; /* Empêcher le texte de passer à la ligne suivante */
+    overflow: hidden; /* Masquer tout débordement de texte */
+    text-overflow: ellipsis; /* Ajouter "..." si le texte dépasse */
+  }
+  
+  .update-button, .delete-button {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 30%; /* Réduire la largeur des boutons pour qu'ils soient plus réactifs */
+  }
+  
+  .update-button {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .logout-button {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #ff0000; /* Bouton rouge pour déconnexion */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%; /* Prend toute la largeur */
+  }
+  
+  .close-button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #6c757d; /* Bouton gris pour fermer la popup */
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
