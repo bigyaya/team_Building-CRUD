@@ -27,7 +27,8 @@
 
 /* Activity details */
 .activity-details {
-    padding: 20px;
+    height: 80vh;
+    padding: 80px;
 }
 
 .container {

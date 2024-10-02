@@ -6,6 +6,8 @@ import Footer from '../composants/footer';
 import dbConnect from '../utils/dbConnect'; // Importer la connexion à la base de données
 import Activite from '../modeles/Activite'; // Importer le modèle Activite
 import { useRouter } from 'next/router';
+import '../styles/globals.css';
+
 
 export default function Home({ activities }) {
   const router = useRouter();

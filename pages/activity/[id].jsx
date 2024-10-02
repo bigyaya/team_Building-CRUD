@@ -2,6 +2,8 @@
 import dbConnect from '../../utils/dbConnect';
 import Activite from '../../modeles/Activite';
 import '../../styles/activity.css'; // Import du fichier CSS
+import Header from "../../composants/Header"
+import Footer from "../../composants/footer"
 
 const ActivityPage = ({ activite }) => {
   if (!activite) {
@@ -10,6 +12,7 @@ const ActivityPage = ({ activite }) => {
 
   return (
     <div className="activity-page">
+      < Header />
       {/* Section Hero avec image de fond */}
       <header className="hero" style={{ backgroundImage: `url(${activite.image})` }}>
         <div className="overlay">
@@ -31,6 +34,7 @@ const ActivityPage = ({ activite }) => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
@@ -67,44 +71,3 @@ export async function getServerSideProps({ params }) {
 export default ActivityPage;
 
 
-
-
-// import dbConnect from '../../utils/dbConnect';
-// import Activite from '../../modeles/Activite';
-// import ActivityPage from '../../composants/ActivityPage'; // Importer le composant
-
-// const ActivityDetail = ({ activite }) => {
-//   if (!activite) {
-//     return <div>Activité introuvable</div>;
-//   }
-
-//   return <ActivityPage activite={activite} />;
-// };
-
-// // Rechercher l'activité par ObjectId dans MongoDB
-// export async function getServerSideProps({ params }) {
-//   await dbConnect();
-
-//   try {
-//     const activite = await Activite.findById(params.id).lean();
-
-//     if (!activite) {
-//       return {
-//         notFound: true, // Renvoie une page 404 si l'activité n'est pas trouvée
-//       };
-//     }
-
-//     return {
-//       props: {
-//         activite: JSON.parse(JSON.stringify(activite)), // Sérialisation nécessaire pour Next.js
-//       },
-//     };
-//   } catch (error) {
-//     console.error('Erreur lors de la récupération de l\'activité:', error);
-//     return {
-//       notFound: true,
-//     };
-//   }
-// }
-
-// export default ActivityDetail;
