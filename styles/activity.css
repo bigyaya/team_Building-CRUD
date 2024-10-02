@@ -1,5 +1,6 @@
 /* Hero section */
 .hero {
+    font-family: 'Poppins', sans-serif;
     position: relative;
     background-size: cover;
     background-position: center;
@@ -32,6 +33,7 @@
 }
 
 .container {
+    font-family: 'Poppins', sans-serif;
     max-width: 800px;
     margin: 0 auto;
 }

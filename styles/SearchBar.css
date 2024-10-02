@@ -1,0 +1,70 @@
+/* /styles/SearchBar.css */
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    width: 100%;
+    gap: 10px;
+    padding: 40px 0px 40px 0px;
+  }
+  
+  input {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    font-family: 'Poppins', sans-serif;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  .search-container {
+    position: relative; /* Conserve le contexte de positionnement pour les suggestions */
+    width: 100%; /* Assure que le champ occupe toute la largeur disponible */
+  }
+  
+  /* Style du champ de saisie */
+  .search-input {
+    width: 100%; /* S'adapte à la largeur du conteneur */
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Style pour la liste des suggestions */
+  .suggestions-list {
+    position: absolute; /* Permet de ne pas impacter les autres éléments de la page */
+    top: 40px; /* Positionnement sous le champ de saisie */
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    background-color: white;
+    list-style: none;
+    padding: 10px;
+    max-height: 150px; /* Limite la hauteur des suggestions */
+    overflow-y: auto; /* Permet le défilement si trop de suggestions */
+    z-index: 1000; /* Garantit que la liste reste au-dessus du reste de la page */
+  }
+  
+  /* Style pour chaque élément de la liste de suggestions */
+  .suggestion-item {
+    cursor: pointer;
+    padding: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .suggestion-item:hover {
+    background-color: #e0e0e0; /* Changement de couleur au survol */
+  }
+  

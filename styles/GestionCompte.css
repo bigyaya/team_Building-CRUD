@@ -1,5 +1,6 @@
 /* Conteneur de la popup */
 .popup-overlay {
+  font-family: 'Poppins', sans-serif;
     position: fixed; /* La popup recouvre l'écran */
     top: 0;
     left: 0;

@@ -1,6 +1,7 @@
 /* styles/navbar.css */
 
 .navbar {
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,11 +45,13 @@
   }
   
   .navbar-buttons .login {
+    font-family: 'Poppins', sans-serif;
     background-color: #00CBA9; /* Couleur de bouton Connexion */
     color: white;
   }
   
   .navbar-buttons .signup {
+    font-family: 'Poppins', sans-serif;
     background-color: #0070f3; /* Couleur de bouton Inscription */
     color: white;
   }

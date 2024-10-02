@@ -1,6 +1,7 @@
 /* styles/hero.css */
 
 .hero {
+  font-family: 'Poppins', sans-serif;
     height: 100vh; /* Pleine hauteur de la fenêtre */
     background-image: url('/creative-pic.png'); 
     background-size: cover;

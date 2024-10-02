@@ -5,8 +5,9 @@ import ActivitiesGrid from '../composants/ActivitiesGrid';
 import Footer from '../composants/footer';
 import dbConnect from '../utils/dbConnect'; // Importer la connexion à la base de données
 import Activite from '../modeles/Activite'; // Importer le modèle Activite
+import SearchBar from '../composants/SearchBar'; // Importer le composant SearchBar
 import { useRouter } from 'next/router';
-import '../styles/globals.css';
+// import '../styles/globals.css';
 
 
 export default function Home({ activities }) {
@@ -19,6 +20,7 @@ export default function Home({ activities }) {
   return (
     <div>
       <Header />
+      <SearchBar />
       <Hero />
       <ActivitiesGrid activities={activities} /> {/* Passer les activités en tant que props */}
       <Footer />

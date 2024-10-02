@@ -1,4 +1,4 @@
-// import '../styles/globals.css';
+import '../styles/globals.css';
 import '../styles/navbar.css'
 import '../styles/footer.css'
 import Header from '../composants/Header';
