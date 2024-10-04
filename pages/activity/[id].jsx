@@ -4,8 +4,10 @@ import Activite from '../../modeles/Activite';
 import '../../styles/activity.css'; // Import du fichier CSS
 import Header from "../../composants/Header"
 import Footer from "../../composants/footer"
+import { useRouter } from 'next/router';
 
 const ActivityPage = ({ activite }) => {
+  const router = useRouter();
   if (!activite) {
     return <div>Activité introuvable</div>;
   }
@@ -29,8 +31,13 @@ const ActivityPage = ({ activite }) => {
 
           {/* Boutons d'action */}
           <div className="buttons">
-            <button className="button primary">Réserver cette activité</button>
-            <button className="button secondary">Retour à la liste</button>
+            <button className="button primary" onClick={() => router.push(`/activity/devis?id=${activite._id}`)}>
+              Demander un devis
+            </button>
+
+            <button className="button secondary" onClick={() => router.push('/activity/list')}>
+              Voir la liste
+            </button>
           </div>
         </div>
       </section>
@@ -69,5 +76,3 @@ export async function getServerSideProps({ params }) {
 
 
 export default ActivityPage;
-
-

@@ -1,6 +1,6 @@
 // composants/ActivitiesGrid.jsx
-import { useRouter } from 'next/router';
 import '../styles/activities.css'; // Importer les styles
+import { useRouter } from 'next/router';
 
 export default function ActivitiesGrid({ activities }) { // Les activités sont maintenant passées en props
   const router = useRouter();
