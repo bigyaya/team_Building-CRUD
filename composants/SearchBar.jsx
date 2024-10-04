@@ -14,10 +14,16 @@ export default function SearchBar() {
     const [suggestions, setSuggestions] = useState([]); // État pour stocker les suggestions de l'API
 
     const [location, setLocation] = useState('');
-    const [theme, setTheme] = useState('');
+    // État pour gérer le thème sélectionné
+    const [theme, setTheme] = useState(''); // <-- Thème sélectionné
+    const themes = ['Escape Game', 'Team Building', 'Murder Party', 'Jeu de Piste']; // <-- Liste des thèmes
+
     const [date, setDate] = useState('');
     const [results, setResults] = useState([]);
     const [nbPersonnes, setNbPersonnes] = useState('');
+
+
+
 
 
     // Fonction pour récupérer les suggestions d'adresse depuis l'API data.gouv.fr
@@ -51,24 +57,30 @@ export default function SearchBar() {
 
 
     // Fonction pour gérer la soumission du formulaire
-    const handleSearch = async (e) => {
-        e.preventDefault();
-
-        // Construire la requête avec les paramètres
-        const query = new URLSearchParams({
-            location: location,
-            theme: theme,
-            date: date
-        }).toString();
-
-        // Effectuer la requête vers l'API
-        const res = await fetch(`/api/recherche?${query}`);
-        const data = await res.json();
-
-        if (data.success) {
-            setResults(data.data); // Mettre à jour les résultats
-        }
+    const handleSearch = () => {
+        // Construire l'URL de redirection avec les critères de recherche
+        router.push({
+            pathname: '/activity/searchResults',
+            query: {
+                location: searchLocation,
+                theme: selectedTheme,
+                participants: numberOfPeople,
+                date: selectedDate
+            }
+        });
     };
+
+    // Fonction pour gérer le changement dans le champ thème
+    const handleThemeChange = (event) => {
+        setTheme(event.target.value); // Met à jour le thème sélectionné
+    };
+
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     // Code de redirection ou de traitement après la recherche
+    //     console.log('Adresse:', adresse);
+    //     console.log('Thème:', theme); // Affiche le thème sélectionné
+    //   };
 
 
 
@@ -101,12 +113,17 @@ export default function SearchBar() {
                 </div>
 
                 {/* Sélecteur de thème */}
-                <input
-                    type="text"
-                    placeholder="Thème"
-                    value={theme}
-                    onChange={(e) => setTheme(e.target.value)}
-                />
+                {/* Dropdown pour les thèmes */}
+                <select value={theme} onChange={handleThemeChange}>
+                    <option value="" disabled>
+                        Sélectionnez un thème
+                    </option>
+                    {themes.map((t, index) => (
+                        <option key={index} value={t}>
+                            {t}
+                        </option>
+                    ))}
+                </select>
 
                 {/* Champ de recherche pour le nombre de personnes */}
                 <input
@@ -127,22 +144,7 @@ export default function SearchBar() {
                 <button type="submit">Rechercher</button>
             </form>
 
-            {/* Affichage des résultats */}
-            {/* <div>
-                {results.length > 0 ? (
-                    <ul>
-                        {results.map((activite) => (
-                            <li key={activite._id}>
-                                <h3>{activite.title}</h3>
-                                <p>{activite.location}</p>
-                                <p>{activite.theme}</p>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>Aucun résultat trouvé</p>
-                )}
-            </div> */}
+
         </div>
     );
 }
