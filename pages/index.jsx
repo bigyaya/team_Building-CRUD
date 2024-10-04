@@ -32,6 +32,8 @@ export default function Home({ activities }) {
 export async function getServerSideProps() {
   await dbConnect(); // Connexion à MongoDB
 
+  
+
   try {
     const result = await Activite.find({}); // Récupérer toutes les activités
     const activities = result.map((doc) => {
@@ -41,20 +43,20 @@ export async function getServerSideProps() {
       return activity;
     });
 
-  //    // Sérialiser les dates en chaînes de caractères
-  // const serializedActivities = activities.map((activity) => {
-  //   return {
-  //     ...activity,
-  //     availableDates: activity.availableDates.map(date => date.toISOString()), // Conversion des dates
-  //     dateCreation: activity.dateCreation ? activity.dateCreation.toISOString() : null // Sérialisation de la date de création
-  //   };
-  // });
+     // Sérialiser les dates en chaînes de caractères
+  const serializedActivities = activities.map((activity) => {
+    return {
+      ...activity,
+      availableDates: activity.availableDates.map(date => date.toISOString()), // Conversion des dates
+      dateCreation: activity.dateCreation ? activity.dateCreation.toISOString() : null // Sérialisation de la date de création
+    };
+  });
 
-  //  return {
-  //   props: {
-  //     activities: serializedActivities
-  //   }
-  // };
+   return {
+    props: {
+      activities: serializedActivities
+    }
+  };
 
     console.log('Activités récupérées :', activities); // Ajoutez ceci pour voir si les activités sont récupérées
 
